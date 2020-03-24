@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { remote } from 'webdriverio';
+
+const handleClick = async () => {
+  const browser = await remote({
+    logLevel: 'trace',
+    capabilities: {
+      browserName: 'chrome'
+    }
+  })
+  await browser.url('https://webdriver.io')
+  const title = await browser.getTitle()
+  alert(title)
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={handleClick}>webdriverio起動</button>
     </div>
   );
 }
